@@ -96,7 +96,7 @@
               <br>
               <p class="mt-4 text-sm text-gray-500 sm:mt-0">
                 Don't have an account?
-                <a href="signup.html" class="text-gray-700 underline">Sign up</a>.
+                <a href="signup.php" class="text-gray-700 underline">Sign up</a>.
               </p>
             </div>
           </form>

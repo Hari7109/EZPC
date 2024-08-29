@@ -1,3 +1,58 @@
+<?php
+include("php/connection.php");
+
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+// Check if the form is submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  // Retrieve form data
+  $firstName = $_POST['first_name'];
+  $lastName = $_POST['last_name'];
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+  $passwordConfirmation = $_POST['password_confirmation'];
+
+  // Validate form data (simple validation)
+  if (empty($firstName) || empty($lastName) || empty($email) || empty($password)) {
+      echo "All fields are required.";
+  } elseif ($password !== $passwordConfirmation) {
+      echo "Passwords do not match.";
+  } else {
+      // Hash the password
+      $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+      // Prepare SQL and bind parameters
+      $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)");
+      $stmt->bind_param("ssss", $firstName, $lastName, $email, $hashedPassword);
+
+      try {
+          // Execute the statement
+          $stmt->execute();
+          echo "User registered successfully!";
+          header("Location: http://localhost/ezpc/signin.php");
+      } catch (mysqli_sql_exception $e) {
+          if ($e->getCode() == 1062) { // Duplicate entry for unique key
+              echo "<script> alert('A user with this email already exists.');</script>";
+              header("Location: http://localhost/ezpc/signin.php");
+          } else {
+              echo "An error occurred: " . $e->getMessage();
+          }
+      }
+
+      // Close the statement
+      $stmt->close();
+  }
+}
+
+// Close the connection
+$conn->close();
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,7 +108,7 @@
             </p>
           </div>
   
-          <form action="php/register.php" method="post" class="mt-8 grid grid-cols-6 gap-6">
+          <form action="" method="post" class="mt-8 grid grid-cols-6 gap-6">
             <div class="col-span-6 sm:col-span-3">
               <label for="FirstName" class="block text-sm font-medium text-gray-700">
                 First Name
