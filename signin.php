@@ -1,3 +1,48 @@
+<?php
+include('php/connection.php');
+
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $user_name = $_POST['user_name'];
+    $password = $_POST['password'];
+
+    // Validate input
+    if (empty($user_name) || empty($password)) {
+        $error = "Please fill in all fields.";
+    } else {
+        // Query database
+        $query = "SELECT * FROM users WHERE user_name = '$user_name'";
+        $result = $conn->query($query);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $hashed_password = $row['password'];
+
+            // Compare passwords
+            if (password_verify($password, $hashed_password)) {
+                // Login successful
+                session_start();
+                $_SESSION['user_name'] = $user_name;
+                header("Location: index.html");
+                exit;
+            } else {
+                echo  "<script>alert('Invalid username or password.')</script>";
+            }
+        } else {
+            echo "<script>alert('Invalid username or password.')</script>";
+        }
+    }
+}
+
+// Close connection
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,16 +99,16 @@
             </p>
           </div>
   
-          <form action="#" class="mt-8 grid grid-cols-6 gap-6">
+          <form action="" method="post" class="mt-8 grid grid-cols-6 gap-6">
                         
   
             <div class="col-span-6">
-              <label for="Email" class="block text-sm font-medium text-gray-700"> Email </label>
+              <label for="Email" class="block text-sm font-medium text-gray-700"> User name </label>
   
               <input
-                type="email"
-                id="Email"
-                name="email"
+                type="text"
+                id="user_name"
+                name="user_name"
                 class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-md p-2 "
               />
             </div>
@@ -90,7 +135,7 @@
             </div>
   
             <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-              <button class="inline-block shrink-0 rounded-md border border-red-600 bg-red-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500">
+              <button type="submit" class="inline-block shrink-0 rounded-md border border-red-600 bg-red-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500">
                 Sign in
               </button>
               <br>

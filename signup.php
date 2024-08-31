@@ -9,14 +9,14 @@ if ($conn->connect_error) {
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   // Retrieve form data
-  $firstName = $_POST['first_name'];
-  $lastName = $_POST['last_name'];
+  $name = $_POST['name'];
+  $user_name = $_POST['user_name'];
   $email = $_POST['email'];
   $password = $_POST['password'];
   $passwordConfirmation = $_POST['password_confirmation'];
 
   // Validate form data (simple validation)
-  if (empty($firstName) || empty($lastName) || empty($email) || empty($password)) {
+  if (empty($name) || empty($user_name) || empty($email) || empty($password)) {
       echo "All fields are required.";
   } elseif ($password !== $passwordConfirmation) {
       echo "Passwords do not match.";
@@ -25,8 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
       // Prepare SQL and bind parameters
-      $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)");
-      $stmt->bind_param("ssss", $firstName, $lastName, $email, $hashedPassword);
+      $stmt = $conn->prepare("INSERT INTO users (name, user_name, email, password) VALUES (?, ?, ?, ?)");
+      $stmt->bind_param("ssss", $name, $user_name, $email, $hashedPassword);
 
       try {
           // Execute the statement
@@ -111,26 +111,26 @@ $conn->close();
           <form action="" method="post" class="mt-8 grid grid-cols-6 gap-6">
             <div class="col-span-6 sm:col-span-3">
               <label for="FirstName" class="block text-sm font-medium text-gray-700">
-                First Name
+                Name
               </label>
   
               <input
                 type="text"
-                id="FirstName"
-                name="first_name"
+                id="name"
+                name="name"
                 class="mt-1 w-full rounded-md border-grey-600 bg-white text-sm text-gray-700 shadow-md p-2 "
               />
             </div>
   
             <div class="col-span-6 sm:col-span-3">
               <label for="LastName" class="block text-sm font-medium text-gray-700">
-                Last Name
+                User name
               </label>
   
               <input
                 type="text"
-                id="LastName"
-                name="last_name"
+                id="user_name"
+                name="user_name"
                 class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-md p-2 "
               />
             </div>
