@@ -22,16 +22,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             $hashed_password = $row['password'];
+            $id = $row['id'];
 
             // Compare passwords
-            if (password_verify($password, $hashed_password)) {
+            if ($password== $hashed_password) {
                 // Login successful
                 session_start();
                 $_SESSION['user_name'] = $user_name;
-                header("Location: index.html");
+                $_SESSION['UID']=$id;
+                header("Location: index.php");
                 exit;
             } else {
-                echo  "<script>alert('Invalid username or password.')</script>";
+
+                echo  "<script>alert('$hp')</script>";
             }
         } else {
             echo "<script>alert('Invalid username or password.')</script>";

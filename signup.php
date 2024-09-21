@@ -22,11 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       echo "Passwords do not match.";
   } else {
       // Hash the password
-      $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+      // $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
       // Prepare SQL and bind parameters
       $stmt = $conn->prepare("INSERT INTO users (name, user_name, email, password) VALUES (?, ?, ?, ?)");
-      $stmt->bind_param("ssss", $name, $user_name, $email, $hashedPassword);
+      $stmt->bind_param("ssss", $name, $user_name, $email, $password);
 
       try {
           // Execute the statement

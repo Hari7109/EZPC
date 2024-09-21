@@ -1,7 +1,3 @@
-<?php
-include 'php/connection.php';
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,25 +12,15 @@ include 'php/connection.php';
 </head>
 
 <body>
-    <section id="header">
-        <a href="#"><img src="img/logo.png" class="logo" alt=""></a>
-
-        <div>
-            <ul id="navbar">
-                <li><a href="index.html">Home</a></li>
-                <li><a class="active" href="shop.html">Shop</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li id="lg-bag"><a href="cart.html"><i class='bx bx-shopping-bag'></i></a></li>
-                <a href="#" id="close"><i class='bx bx-x'></i></a>
-            </ul>
-        </div>
-        <div id="mobile">
-            <a href="cart.html"><i class='bx bx-shopping-bag'></i></a>
-            <i id="bar" class='bx bx-menu'></i>
-        </div>
-    </section>
+    <?php include 'nav.php';
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $id = $_POST['id'];
+        $sql_insert = "INSERT INTO cart (uid,item_id) VALUES($UID,$id)";
+        if (!$conn->query($sql_insert)) {
+            echo "<script>alert('Error inserting data')</script>";
+        }
+    }
+    ?>
 
     <section id="page-header">
         <h2>#stayhome</h2>
@@ -85,15 +71,12 @@ include 'php/connection.php';
                         </div>
                         <form method="POST">
                             <input type="text" name="id" value="<?php echo $row['id']; ?>" hidden>
-                            <button type="submit" name="addItem">
+                            <button type="submit" name="submit">
                                 <i class='bx bx-cart cart'></i>
                             </button>
+
+
                         </form>
-                        <?php if(isset($_POST['addItem'])){
-                            $id=$_POST['id'];
-                            $sql_insert ="INSERT INTO cart (uid,item_id) VALUES($UID,$id)";
-                        }
-                        ?>
                     </div>
             <?php }
             } else {
