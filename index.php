@@ -13,7 +13,7 @@
     </head>
 
     <body>
-        <section id="header">
+        <!-- <section id="header">
             <a href="#"><img  src="img/logo.png" class="logo" alt=""></a>
 
             <div>
@@ -23,6 +23,7 @@
                     <li><a href="blog.html">Blog</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
+                    <li><a href="item.php">item</a></li>
                     <li id="lg-bag"><a href="cart.html"><i class='bx bx-shopping-bag' ></i></a></li>
                     <a href="#" id="close"><i class='bx bx-x'></i></a>
                 </ul>
@@ -31,7 +32,7 @@
                 <a href="cart.html"><i class='bx bx-shopping-bag' ></i></a>
                 <i id="bar" class='bx bx-menu'></i>
             </div>
-        </section>
+        </section> -->
 
         <section id="main">
             <h4 class="text-white" >Trade-in-offer</h4>
