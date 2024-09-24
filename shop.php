@@ -14,8 +14,8 @@
 <body>
     <?php include 'nav.php';
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $id = $_POST['id'];
-        $sql_insert = "INSERT INTO cart (uid,item_id) VALUES($UID,$id)";
+        $item_id = $_POST['item_id'];
+        $sql_insert = "INSERT INTO cart (uid,item_id) VALUES($UID,$item_id)";
         if (!$conn->query($sql_insert)) {
             echo "<script>alert('Error inserting data')</script>";
         }
@@ -70,7 +70,7 @@
                             <!-- <h4>₹ " <?php echo  $row['price']; ?> "</h4> -->
                         </div>
                         <form method="POST">
-                            <input type="text" name="id" value="<?php echo $row['id']; ?>" hidden>
+                            <input type="text" name="item_id" value="<?php echo $row['item_id']; ?>" hidden>
                             <button type="submit" name="submit">
                                 <i class='bx bx-cart cart'></i>
                             </button>
