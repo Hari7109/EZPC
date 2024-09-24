@@ -12,7 +12,7 @@
  </head>
 
  <body>
-     <?php include 'nav.php';   
+     <?php include 'nav.php';
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["rem"])) {
             $C_id = $_POST['C_id'];
             $sql_delete = "DELETE FROM cart WHERE uid=$UID AND C_id=$C_id";
@@ -22,6 +22,74 @@
             //  header("Location: cart.php");
             // exit();
         }
+        function checkCompatibility($cartItems)
+{
+    $flags = [
+        'cpu' => false,
+        'motherboard' => false,
+        'ram' => false,
+        'case' => false,
+        'psu' => false
+    ];
+
+    $errors = [];
+
+    // Example check: CPU and Motherboard Socket Compatibility
+    $cpu = null;
+    $motherboard = null;
+    $ram = null;
+    $case = null;
+    $psu = null;
+
+    foreach ($cartItems as $item) {
+        if ($item['type'] == 'cpu') {
+            $cpu = $item;
+        } elseif ($item['type'] == 'motherboard') {
+            $motherboard = $item;
+        } elseif ($item['type'] == 'ram') {
+            $ram = $item;
+        } elseif ($item['type'] == 'case') {
+            $case = $item;
+        } elseif ($item['type'] == 'psu') {
+            $psu = $item;
+        }
+    }
+
+    // Check CPU and motherboard compatibility
+    if ($cpu && $motherboard) {
+        if ($cpu['socket'] !== $motherboard['socket']) {
+            $errors[] = "CPU socket {$cpu['socket']} is not compatible with motherboard socket {$motherboard['socket']}.";
+            $flags['cpu'] = true;
+            $flags['motherboard'] = true;
+        }
+    }
+
+    // Check RAM and motherboard compatibility
+    if ($motherboard && $ram) {
+        if ($motherboard['ddr'] !== $ram['ddr']) {
+            $errors[] = "Motherboard DDR type {$motherboard['ddr']} is not compatible with RAM DDR type {$ram['ddr']}.";
+            $flags['motherboard'] = true;
+            $flags['ram'] = true;
+        }
+    }
+
+    // Check case and motherboard size compatibility
+    if ($motherboard && $case) {
+        if ($motherboard['mb_size'] !== $case['mb_size']) {
+            $errors[] = "Motherboard MB size {$motherboard['mb_size']} is not compatible with case size {$case['mb_size']}.";
+            $flags['motherboard'] = true;
+            $flags['case'] = true;
+        }
+    }
+
+    // Add more checks as needed
+
+    return ['flags' => $flags, 'errors' => $errors];
+}
+
+        // Example usage
+
+
         ?>
 
 
@@ -46,33 +114,48 @@
                 $result = $conn->query($sql);
 
                 ?>
+<tbody>
+    <?php if ($result->num_rows > 0):
+        $rows = $result->fetch_all(MYSQLI_ASSOC);
+        $compatibilityCheck = checkCompatibility($rows);
+        $compatibilityFlags = $compatibilityCheck['flags'];
+        $compatibilityErrors = $compatibilityCheck['errors'];
 
-             <tbody>
-                 <?php if ($result->num_rows > 0): ?>
-                     <?php while ($row = $result->fetch_assoc()): ?>
-                         <tr>
-                             <td>
-                                 <form method="post">
-                                     <input type="text" name="C_id" value="<?php echo $row['C_id']; ?>"hidden>
-                                     <button class="normal" type="submit" name="rem"><i class='bx bx-x-circle'></i></button>
-                                 </form>
-                             </td>
-                             <td><img src="./img/products/<?php echo $row['photo']; ?>"></td>
-                             <td><?php echo $row['name']; ?></td>
-                             <!-- <td>amazon</td> -->
-                            <td>
-                                <a href="<?php echo $row['pro_link_amz']; ?>" target="_blank">Amazon</a>    
-                               
-                            </td>
-                             
-                         </tr>
-                     <?php endwhile; ?>
-                 <?php else: ?>
-                     <tr>
-                         <td colspan="4">Your cart is empty.</td>
-                     </tr>
-                 <?php endif; ?>
-             </tbody>
+        foreach ($rows as $row):
+            // Add class based on the compatibility flag for this item type
+            $rowClass = '';
+            if ($row['type'] == 'cpu' && $compatibilityFlags['cpu']) {
+                $rowClass = 'error-row';
+            } elseif ($row['type'] == 'motherboard' && $compatibilityFlags['motherboard']) {
+                $rowClass = 'error-row';
+            } elseif ($row['type'] == 'ram' && $compatibilityFlags['ram']) {
+                $rowClass = 'error-row';
+            } elseif ($row['type'] == 'case' && $compatibilityFlags['case']) {
+                $rowClass = 'error-row';
+            } elseif ($row['type'] == 'psu' && $compatibilityFlags['psu']) {
+                $rowClass = 'error-row';
+            }
+            ?>
+            <tr class="<?php echo $rowClass; ?>">
+                <td>
+                    <form method="post">
+                        <input type="text" name="C_id" value="<?php echo $row['C_id']; ?>" hidden>
+                        <button class="normal" type="submit" name="rem"><i class='bx bx-x-circle'></i></button>
+                    </form>
+                </td>
+                <td><img src="./img/products/<?php echo $row['photo']; ?>" alt="<?php echo $row['name']; ?>"></td>
+                <td><?php echo $row['name']; ?></td>
+                <td><a href="<?php echo $row['pro_link_amz']; ?>" target="_blank">Amazon</a></td>
+            </tr>
+        <?php endforeach; ?>
+
+        
+    <?php else: ?>
+        <tr>
+            <td colspan="4">Your cart is empty.</td>
+        </tr>
+    <?php endif; ?>
+</tbody>
 
          </table>
      </section>
@@ -85,55 +168,24 @@
          <div id="subtotal">
              <h3>compare compatibility</h3>
              <table>
-
+             <?php if (!empty($compatibilityErrors)): ?>
+            <tr class="error-row-details">
+                <td colspan="4">
+                    <ul class="error-list">
+                        <?php foreach ($compatibilityErrors as $error): ?>
+                            <li><?php echo $error; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </td>
+            </tr>
+        <?php endif; ?>
              </table>
              <button class="normal">Proceed to shop</button>
          </div>
      </section>
 
-     <footer class="section-p1">
-         <div class="col">
-             <img class="logo" src="./img/logo.png" alt="">
-             <h4>Contact</h4>
-             <p><strong>Address:</strong> Ernakulam, Kerala, India</p>
-             <p><strong>Phone:</strong> +91 8590 548 241 / +91 6282 130 150</p>
-             <p><strong>Owner:</strong> Hari, Harish</p>
-             <div class="follow">
-                 <h4>Follow us</h4>
-                 <div class="icon">
-                     <i class='bx bxl-facebook'></i>
-                     <i class='bx bxl-twitter'></i>
-                     <i class='bx bxl-instagram'></i>
-                     <i class='bx bxl-pinterest-alt'></i>
-                     <i class='bx bxl-youtube'></i>
-                 </div>
-             </div>
-         </div>
-
-         <div class="col">
-             <h4>About</h4>
-             <a href="#">About us</a>
-             <a href="#">Privacy Policy</a>
-             <a href="#">Terms & Conditions</a>
-             <a href="#">Contact Us</a>
-         </div>
-
-         <div class="col">
-             <h4>My Account</h4>
-             <a href="#">Sign In</a>
-             <a href="#">My Wishlist</a>
-             <a href="#">Help</a>
-         </div>
-
-         <div class="col install">
-
-         </div>
-
-         <div class="copyright">
-
-         </div>
-     </footer>
-
+     <?php include'footer.php' ?>
+     
      <script src="script.js"></script>
  </body>
 

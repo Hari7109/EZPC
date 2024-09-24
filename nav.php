@@ -2,7 +2,15 @@
 include 'php/connection.php';
 session_start();
 
+
+if(!empty($_SESSION['UID'])){
 $UID = $_SESSION['UID'];
+}else{
+    header("Location: signin.php");
+    exit;
+}
+
+
 
 $cfile = basename($_SERVER['PHP_SELF']);
 ?>
