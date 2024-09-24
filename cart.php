@@ -59,7 +59,12 @@
                              </td>
                              <td><img src="./img/products/<?php echo $row['photo']; ?>"></td>
                              <td><?php echo $row['name']; ?></td>
-                             <td>amazon</td>
+                             <!-- <td>amazon</td> -->
+                            <td>
+                                <a href="<?php echo $row['pro_link_amz']; ?>" target="_blank">Amazon</a>    
+                               
+                            </td>
+                             
                          </tr>
                      <?php endwhile; ?>
                  <?php else: ?>
@@ -133,13 +138,3 @@
  </body>
 
  </html>
-
-
-
- <!-- <div id="subtotal">
-    <h3>compare compatibility</h3>
-    <table>
-
-    </table>
-    <button class="normal">Proceed to shop</button>
-</div> -->

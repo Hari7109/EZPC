@@ -8,7 +8,7 @@ if (isset($_POST['add_item'])) {
     $type = $_POST['type'];
     $socket = $_POST['socket'];
     $mb_size = $_POST['mb_size'];
-    $drr = $_POST['drr'];
+    $ddr = $_POST['ddr'];
     $ram_speed = $_POST['ram_speed'];
     $nvme_slot = $_POST['nvme_slot'];
     $ram_slot = $_POST['ram_slot'];
@@ -18,8 +18,8 @@ if (isset($_POST['add_item'])) {
     $ssd_type = $_POST['ssd_type'];
     $ssd_size = $_POST['ssd_size'];
 
-    $sql = "INSERT INTO item (name, type, socket, mb_size, drr, ram_speed, nvme_slot, ram_slot, watt, sata, photo, ssd_type, ssd_size) 
-            VALUES ('$name', '$type', '$socket', '$mb_size', '$drr', '$ram_speed', '$nvme_slot', '$ram_slot', '$watt', '$sata', '$photo', '$ssd_type', '$ssd_size')";
+    $sql = "INSERT INTO item (name, type, socket, mb_size, ddr, ram_speed, nvme_slot, ram_slot, watt, sata, photo, ssd_type, ssd_size) 
+            VALUES ('$name', '$type', '$socket', '$mb_size', '$ddr', '$ram_speed', '$nvme_slot', '$ram_slot', '$watt', '$sata', '$photo', '$ssd_type', '$ssd_size')";
 
     if ($conn->query($sql) === TRUE) {
         echo "New record created successfully!";
@@ -46,7 +46,7 @@ if (isset($_POST['update_item'])) {
     $type = $_POST['type'];
     $socket = $_POST['socket'];
     $mb_size = $_POST['mb_size'];
-    $drr = $_POST['drr'];
+    $ddr = $_POST['ddr'];
     $ram_speed = $_POST['ram_speed'];
     $nvme_slot = $_POST['nvme_slot'];
     $ram_slot = $_POST['ram_slot'];
@@ -56,7 +56,7 @@ if (isset($_POST['update_item'])) {
     $ssd_type = $_POST['ssd_type'];
     $ssd_size = $_POST['ssd_size'];
 
-    $sql = "UPDATE item SET name='$name', type='$type', socket='$socket', mb_size='$mb_size', drr='$drr', ram_speed='$ram_speed', 
+    $sql = "UPDATE item SET name='$name', type='$type', socket='$socket', mb_size='$mb_size', ddr='$ddr', ram_speed='$ram_speed', 
             nvme_slot='$nvme_slot', ram_slot='$ram_slot', watt='$watt', sata='$sata', photo='$photo', ssd_type='$ssd_type', ssd_size='$ssd_size' WHERE id=$id";
 
     if ($conn->query($sql) === TRUE) {
@@ -87,7 +87,7 @@ $result = $conn->query($sql);
     Type: <input type="text" name="type"><br> <br>
     Socket: <input type="text" name="socket"><br> <br>
     MB Size: <input type="text" name="mb_size"><br> <br>
-    DDR: <input type="text" name="drr"><br> <br>
+    DDR: <input type="text" name="ddr"><br> <br>
     RAM Speed: <input type="text" name="ram_speed"><br> <br>
     NVMe Slot: <input type="text" name="nvme_slot"><br> <br>
     RAM Slot: <input type="text" name="ram_slot"><br> <br>
@@ -120,12 +120,12 @@ $result = $conn->query($sql);
     <?php if ($result->num_rows > 0): ?>
         <?php while($row = $result->fetch_assoc()): ?>
             <tr>
-                <td><?= $row['id'] ?></td>
+                <td><?= $row['item_id'] ?></td>
                 <td><?= $row['name'] ?></td>
                 <td><?= $row['type'] ?></td>
                 <td><?= $row['socket'] ?></td>
                 <td><?= $row['mb_size'] ?></td>
-                <td><?= $row['drr'] ?></td>
+                <td><?= $row['ddr'] ?></td>
                 <td><?= $row['ram_speed'] ?></td>
                 <td><?= $row['nvme_slot'] ?></td>
                 <td><?= $row['ram_slot'] ?></td>
@@ -133,14 +133,14 @@ $result = $conn->query($sql);
                 <td><?= $row['sata'] ?></td>
                 <td><img src="<?= $row['photo'] ?>" alt="photo" width="50"></td>
                 <td>
-                    <a href="?delete_id=<?= $row['id'] ?>">Delete</a>
+                    <a href="?delete_id=<?= $row['item_id'] ?>">Delete</a>
                     <form method="POST" action="">
-                        <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                        <input type="hidden" name="id" value="<?= $row['item_id'] ?>">
                         Name: <input type="text" name="name" value="<?= $row['name'] ?>"><br>
                         Type: <input type="text" name="type" value="<?= $row['type'] ?>"><br>
                         Socket: <input type="text" name="socket" value="<?= $row['socket'] ?>"><br>
                         MB Size: <input type="text" name="mb_size" value="<?= $row['mb_size'] ?>"><br>
-                        DDR: <input type="text" name="drr" value="<?= $row['drr'] ?>"><br>
+                        DDR: <input type="text" name="ddr" value="<?= $row['ddr'] ?>"><br>
                         RAM Speed: <input type="text" name="ram_speed" value="<?= $row['ram_speed'] ?>"><br>
                         NVMe Slot: <input type="text" name="nvme_slot" value="<?= $row['nvme_slot'] ?>"><br>
                         RAM Slot: <input type="text" name="ram_slot" value="<?= $row['ram_slot'] ?>"><br>
