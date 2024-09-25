@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2024 at 02:41 PM
+-- Generation Time: Sep 25, 2024 at 09:41 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cart` (
+  `C_id` int(11) NOT NULL,
   `uid` int(11) DEFAULT NULL,
   `item_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -36,11 +37,13 @@ CREATE TABLE `cart` (
 -- Dumping data for table `cart`
 --
 
-INSERT INTO `cart` (`uid`, `item_id`) VALUES
-(2, 1),
-(2, 1),
-(2, 1),
-(2, 1);
+INSERT INTO `cart` (`C_id`, `uid`, `item_id`) VALUES
+(7, 2, 1),
+(8, 2, 11),
+(9, 2, 9),
+(13, 2, 14),
+(14, 2, 4),
+(15, 2, 19);
 
 -- --------------------------------------------------------
 
@@ -69,7 +72,7 @@ INSERT INTO `categories` (`id`, `name`, `description`, `created_at`) VALUES
 --
 
 CREATE TABLE `item` (
-  `id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
   `name` varchar(200) DEFAULT NULL,
   `type` varchar(100) DEFAULT NULL,
   `socket` varchar(100) DEFAULT NULL,
@@ -82,25 +85,29 @@ CREATE TABLE `item` (
   `sata` int(11) DEFAULT NULL,
   `photo` varchar(300) DEFAULT NULL,
   `ssd_type` varchar(100) DEFAULT NULL,
-  `ssd_size` int(11) DEFAULT NULL
+  `ssd_size` int(11) DEFAULT NULL,
+  `pro_link_amz` varchar(256) DEFAULT NULL,
+  `pro_link_flip` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `item`
 --
 
-INSERT INTO `item` (`id`, `name`, `type`, `socket`, `mb_size`, `ddr`, `ram_speed`, `nvme_slot`, `ram_slot`, `watt`, `sata`, `photo`, `ssd_type`, `ssd_size`) VALUES
-(1, 'rog mother board', 'motherboard', 'lga100', 'mini', 5, 5600, 2, 8, 80, 4, 'f1.jpg', NULL, NULL),
-(3, 'MSI mother board', 'motherboard', 'am5', 'atx', 6, 7200, 2, 4, 60, 4, '', NULL, NULL),
-(4, 'i5 10th', 'cpu', 'lga100', '', 0, 0, 0, 0, 75, 0, '', NULL, NULL),
-(5, 'Ryzen 5', 'cpu', 'am5', '', 0, 0, 0, 0, 80, 0, '', NULL, NULL),
-(8, 'crucial', 'ssd', '', '', 0, 0, 0, 0, 0, 0, '', 'sata', 1000),
-(9, 'crucial', 'ssd', '', '', 0, 0, 0, 0, 0, 0, '', 'nvme', 1000),
-(10, 'rog psu', 'psu', '', '', 0, 0, 0, 0, 550, 0, '', '', 0),
-(11, 'msi psu', 'psu', '', '', 0, 0, 0, 0, 450, 0, '', '', 0),
-(12, 'rog ex', 'psu', '', '', 0, 0, 0, 0, 1200, 0, '', '', 0),
-(13, 'rog mini case', 'case', '', 'mini', 0, 0, 0, 0, 0, 0, '', '', 0),
-(14, 'rog atx case', 'case', '', 'atx', 0, 0, 0, 0, 0, 0, '', '', 0);
+INSERT INTO `item` (`item_id`, `name`, `type`, `socket`, `mb_size`, `ddr`, `ram_speed`, `nvme_slot`, `ram_slot`, `watt`, `sata`, `photo`, `ssd_type`, `ssd_size`, `pro_link_amz`, `pro_link_flip`) VALUES
+(1, 'rog mother board', 'motherboard', 'lga100', 'mini', 5, 5600, 2, 8, 80, 4, 'f1.jpg', NULL, NULL, 'https://amzn.in/d/8wRFtJt', NULL),
+(3, 'MSI mother board', 'motherboard', 'am5', 'atx', 6, 7200, 2, 4, 60, 4, '', NULL, NULL, NULL, NULL),
+(4, 'i5 10th', 'cpu', 'lga100', '', 0, 0, 0, 0, 75, 0, '', NULL, NULL, NULL, NULL),
+(5, 'Ryzen 5', 'cpu', 'am5', '', 0, 0, 0, 0, 80, 0, '', NULL, NULL, NULL, NULL),
+(8, 'crucial', 'ssd', '', '', 0, 0, 0, 0, 0, 0, '', 'sata', 1000, NULL, NULL),
+(9, 'crucial', 'ssd', '', '', 0, 0, 0, 0, 0, 0, '', 'nvme', 1000, NULL, NULL),
+(10, 'rog psu', 'psu', '', '', 0, 0, 0, 0, 550, 0, '', '', 0, NULL, NULL),
+(11, 'msi psu', 'psu', '', '', 0, 0, 0, 0, 450, 0, '', '', 0, NULL, NULL),
+(12, 'rog ex', 'psu', '', '', 0, 0, 0, 0, 1200, 0, '', '', 0, NULL, NULL),
+(13, 'rog mini case', 'case', '', 'mini', 0, 0, 0, 0, 0, 0, '', '', 0, NULL, NULL),
+(14, 'rog atx case', 'case', '', 'atx', 0, 0, 0, 0, 0, 0, '', '', 0, NULL, NULL),
+(18, 'ram', 'ram', '', '', 5, 5600, 0, 0, 0, 0, '', '', 0, NULL, NULL),
+(19, 'ram speed', 'ram', '', '', 6, 7200, 0, 0, 0, 0, '', '', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -156,7 +163,9 @@ INSERT INTO `users` (`id`, `name`, `user_name`, `email`, `password`, `created_at
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
-  ADD KEY `uid` (`uid`);
+  ADD PRIMARY KEY (`C_id`),
+  ADD KEY `uid` (`uid`),
+  ADD KEY `item_id` (`item_id`);
 
 --
 -- Indexes for table `categories`
@@ -168,7 +177,7 @@ ALTER TABLE `categories`
 -- Indexes for table `item`
 --
 ALTER TABLE `item`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`item_id`);
 
 --
 -- Indexes for table `products`
@@ -188,6 +197,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `C_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
@@ -197,7 +212,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -210,6 +225,16 @@ ALTER TABLE `products`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

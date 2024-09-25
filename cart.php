@@ -180,7 +180,7 @@
             </tr>
         <?php endif; ?>
              </table>
-             <button class="normal">Proceed to shop</button>
+             
          </div>
      </section>
 

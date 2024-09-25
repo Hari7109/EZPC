@@ -14,27 +14,7 @@
 
     <body>
         <?php include 'nav.php'; ?>
-        <!-- <section id="header">
-            <a href="#"><img  src="img/logo.png" class="logo" alt=""></a>
-
-            <div>
-                <ul id="navbar">
-                    <li><a class="active" href="index.php">Home</a></li>
-                    <li><a href="shop.php">Shop</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="item.php">item</a></li>
-                    <li id="lg-bag"><a href="cart.html"><i class='bx bx-shopping-bag' ></i></a></li>
-                    <a href="#" id="close"><i class='bx bx-x'></i></a>
-                </ul>
-            </div>
-            <div id="mobile">
-                <a href="cart.html"><i class='bx bx-shopping-bag' ></i></a>
-                <i id="bar" class='bx bx-menu'></i>
-            </div>
-        </section> -->
-
+        
         <section id="main">
             <h4 class="text-white" >Trade-in-offer</h4>
             <h2 class="text-white">Super value deals</h2>
@@ -72,7 +52,7 @@
 
         <section id="product1" class="section-p1">
             <h2>Featured Products</h2>
-            <p>Summer Collection New Modern Design</p>
+            
             <div class="pro-container">
                 <div class="pro">
                     <img class="shirt" src="img/products/f1.jpg" alt="">
