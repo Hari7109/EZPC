@@ -1,6 +1,6 @@
 <?php
 include('php/connection.php');
-
+session_start();
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -10,6 +10,7 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_name = $_POST['user_name'];
     $password = $_POST['password'];
+    $_SESSION['username'] = $_POST['user_name'];
 
     // Validate input
     if (empty($user_name) || empty($password)) {

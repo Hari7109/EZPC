@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2024 at 09:41 AM
+-- Generation Time: Sep 26, 2024 at 06:20 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `ezpc`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_users`
+--
+
+CREATE TABLE `admin_users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin_users`
+--
+
+INSERT INTO `admin_users` (`id`, `username`, `password`) VALUES
+(1, 'admin', '$2y$10$6NN90m5sfM9OQiFRYgQEu.N8PypBP526hOwyOd97fKDudZszmQ86W');
 
 -- --------------------------------------------------------
 
@@ -107,7 +126,41 @@ INSERT INTO `item` (`item_id`, `name`, `type`, `socket`, `mb_size`, `ddr`, `ram_
 (13, 'rog mini case', 'case', '', 'mini', 0, 0, 0, 0, 0, 0, '', '', 0, NULL, NULL),
 (14, 'rog atx case', 'case', '', 'atx', 0, 0, 0, 0, 0, 0, '', '', 0, NULL, NULL),
 (18, 'ram', 'ram', '', '', 5, 5600, 0, 0, 0, 0, '', '', 0, NULL, NULL),
-(19, 'ram speed', 'ram', '', '', 6, 7200, 0, 0, 0, 0, '', '', 0, NULL, NULL);
+(19, 'ram speed', 'ram', '', '', 6, 7200, 0, 0, 0, 0, '', '', 0, NULL, NULL),
+(20, 'ant case', 'case', '', 'atx', 0, 0, 0, 0, 0, 0, '', '', 0, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `message` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`id`, `username`, `message`, `created_at`) VALUES
+(1, 'Hari Krishnan A', 'hello, i am ahri', '2024-09-07 07:20:02'),
+(2, 'Tom', 'hello hari\n', '2024-09-07 07:20:23'),
+(4, 'Hari Krishnan A', 'hey\n', '2024-09-09 05:50:45'),
+(5, 'athul', 'ok', '2024-09-09 05:51:25'),
+(6, 'ryan', 'hi\n', '2024-09-09 06:37:33'),
+(10, 'Hari7109', 's', '2024-09-26 04:11:55'),
+(11, 'Hari7109', 'test 2\n', '2024-09-26 04:12:35'),
+(12, 'Hari7109', 'wsw', '2024-09-26 04:15:16'),
+(13, 'itsbaizil', 'hello\n', '2024-09-26 04:17:19'),
+(14, 'Hari7109', 'nigga\n', '2024-09-26 04:17:30'),
+(15, 'Hari7109', 'sdf', '2024-09-26 04:17:40'),
+(16, 'itsbaizil', 'sa', '2024-09-26 04:18:46'),
+(17, 'Hari7109', 'ss', '2024-09-26 04:18:52'),
+(18, 'itsbaizil', 'sss', '2024-09-26 04:19:02');
 
 -- --------------------------------------------------------
 
@@ -153,11 +206,18 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `user_name`, `email`, `password`, `created_at`) VALUES
-(2, 'Hari krishnan', 'Hari7109', 'harikrishnan7109@gmail.com', 'ass', '2024-09-21 11:32:11');
+(2, 'Hari krishnan', 'Hari7109', 'harikrishnan7109@gmail.com', 'ass', '2024-09-21 11:32:11'),
+(3, 'baizil', 'itsbaizil', 'baizildas@gmail.com', 'niggaballs', '2024-09-26 04:16:49');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin_users`
+--
+ALTER TABLE `admin_users`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `cart`
@@ -180,6 +240,12 @@ ALTER TABLE `item`
   ADD PRIMARY KEY (`item_id`);
 
 --
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -197,6 +263,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `admin_users`
+--
+ALTER TABLE `admin_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
@@ -212,7 +284,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -224,7 +302,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

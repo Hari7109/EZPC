@@ -24,7 +24,7 @@ $cfile = basename($_SERVER['PHP_SELF']);
             <li><a <?php if ($cfile == "blog.html") echo 'class="active"' ?>href="blog.html">Blog</a></li>
             <li><a <?php if ($cfile == "about.html") echo 'class="active"' ?>href="about.html">About</a></li>
             <li><a <?php if ($cfile == "contact.html") echo 'class="active"' ?>href="contact.html">Contact</a></li>
-            <li><a <?php if ($cfile == "item.php") echo 'class="active"' ?>href="item.php">item</a></li>
+            <li><a <?php if ($cfile == "chat/index.php") echo 'class="active"' ?>href="chat/index.php">Commuinty</a></li>
             <li id="lg-bag"><a <?php if ($cfile == "cart.php") echo 'class="active"' ?> href="cart.php"><i class='bx bx-shopping-bag'></i></a></li>
             <a href="#" id="close"><i class='bx bx-x'></i></a>
         </ul>
