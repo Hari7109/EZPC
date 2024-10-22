@@ -143,7 +143,7 @@ $result = $conn->query($sql);
                 </div>
                 <div>
                     <label class="block text-sm text-gray-700">Photo URL:</label>
-                    <input type="text" name="photo" class="block w-full mt-1 p-2 border border-gray-300 rounded-md">
+                    <input type="file" name="photo" class="block w-full mt-1 p-2 border border-gray-300 rounded-md">
                 </div>
                 <div>
                     <label class="block text-sm text-gray-700">SSD Type:</label>

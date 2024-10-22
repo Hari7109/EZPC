@@ -29,7 +29,8 @@
         'motherboard' => false,
         'ram' => false,
         'case' => false,
-        'psu' => false
+        'psu' => false,
+        'gpu' => false
     ];
 
     $errors = [];
@@ -39,7 +40,9 @@
     $motherboard = null;
     $ram = null;
     $case = null;
+    $gpu = null;
     $psu = null;
+    
 
     foreach ($cartItems as $item) {
         if ($item['type'] == 'cpu') {
@@ -52,6 +55,8 @@
             $case = $item;
         } elseif ($item['type'] == 'psu') {
             $psu = $item;
+        }elseif ($item['type'] == 'gpu') {
+            $gpu = $item;
         }
     }
 
@@ -60,6 +65,14 @@
         if ($cpu['socket'] !== $motherboard['socket']) {
             $errors[] = "CPU socket {$cpu['socket']} is not compatible with motherboard socket {$motherboard['socket']}.";
             $flags['cpu'] = true;
+            $flags['motherboard'] = true;
+        }
+    }
+    // Check gpu and motherboard
+    if ($gpu && $motherboard) {
+        if ($gpu['PCIe'] !== $motherboard['PCIe']) {
+            $errors[] = "GPU socket {$cpu['PCIe']} is not compatible with motherboard socket {$motherboard['PCIe']}.";
+            $flags['gpu'] = true;
             $flags['motherboard'] = true;
         }
     }
@@ -133,6 +146,8 @@
             } elseif ($row['type'] == 'case' && $compatibilityFlags['case']) {
                 $rowClass = 'error-row';
             } elseif ($row['type'] == 'psu' && $compatibilityFlags['psu']) {
+                $rowClass = 'error-row';
+            }elseif ($row['type'] == 'gpu' && $compatibilityFlags['gpu']) {
                 $rowClass = 'error-row';
             }
             ?>

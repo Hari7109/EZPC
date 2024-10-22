@@ -48,7 +48,7 @@ session_start();
         <h2 class="text-2xl font-semibold mb-4 text-center text-blue-600">Live Chat</h2>
 
         <!-- Chat Box -->
-        <div id="chat-box" class="h-64 overflow-y-auto bg-gray-100 p-4 mb-4 border border-gray-300 rounded-md">
+        <div id="chat-box" style="height: 400px;" class=" overflow-y-auto bg-gray-100 p-4 mb-4 border border-gray-300 rounded-md">
             <p class="text-gray-500 text-center">Loading messages...</p>
         </div>
 

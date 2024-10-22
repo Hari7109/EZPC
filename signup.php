@@ -170,7 +170,7 @@ $conn->close();
               />
             </div>
   
-            <div class="col-span-6">
+            <!-- <div class="col-span-6">
               <label for="MarketingAccept" class="flex gap-4">
                 <input
                   type="checkbox"
@@ -183,7 +183,7 @@ $conn->close();
                   I hereby declare that the information provided is true to the best of my knowledge.
                 </span>
               </label>
-            </div>
+            </div> -->
   
             <div class="col-span-6">
               <p class="text-sm text-gray-500">
