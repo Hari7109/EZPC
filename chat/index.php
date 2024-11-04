@@ -55,7 +55,7 @@ session_start();
         <!-- Chat Form -->
         <form id="chat-form" class="space-y-4">
             <div>
-                <input type="hidden" id="username" class="border p-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your username" value="<?php echo $_SESSION['username']; ?>" >
+                <input type="hidden" id="username" class="border p-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your username" value="<?php echo $_SESSION['user_name']; ?>" >
             </div>
             <div>
                 <textarea id="message" class="border p-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" rows="3" placeholder="Enter your message" required></textarea>

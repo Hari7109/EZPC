@@ -6,44 +6,44 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_name = $_POST['user_name'];
     $password = $_POST['password'];
-    $_SESSION['username'] = $_POST['user_name'];
 
-    // Validate input
+   
     if (empty($user_name) || empty($password)) {
         $error = "Please fill in all fields.";
     } else {
-        // Query database
-        $query = "SELECT * FROM users WHERE user_name = '$user_name'";
-        $result = $conn->query($query);
+        
+        $query = "SELECT * FROM users WHERE user_name = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $user_name);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             $hashed_password = $row['password'];
             $id = $row['id'];
 
-            // Compare passwords
-            if ($password== $hashed_password) {
-                // Login successful
-                session_start();
+            
+            if (password_verify($password, $hashed_password)) {
+                
                 $_SESSION['user_name'] = $user_name;
-                $_SESSION['UID']=$id;
+                $_SESSION['UID'] = $id;
                 header("Location: index.php");
                 exit;
             } else {
-
-                echo  "<script>alert('$hp')</script>";
+                echo "<script>alert('Invalid username or password.')</script>";
             }
         } else {
             echo "<script>alert('Invalid username or password.')</script>";
         }
+
+        $stmt->close();
     }
 }
 
-// Close connection
 $conn->close();
 ?>
 
