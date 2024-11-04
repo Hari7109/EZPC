@@ -10,6 +10,30 @@ if (!isset($_SESSION['admin_logged_in'])) {
 include 'connect.php';
 
 // Insert Item
+// if (isset($_POST['add_item'])) {
+//     $name = $_POST['name'];
+//     $type = $_POST['type'];
+//     $socket = $_POST['socket'];
+//     $mb_size = $_POST['mb_size'];
+//     $ddr = $_POST['ddr'];
+//     $ram_speed = $_POST['ram_speed'];
+//     $nvme_slot = $_POST['nvme_slot'];
+//     $ram_slot = $_POST['ram_slot'];
+//     $watt = $_POST['watt'];
+//     $sata = $_POST['sata'];
+//     $photo = $_POST['photo'];
+//     $ssd_type = $_POST['ssd_type'];
+//     $ssd_size = $_POST['ssd_size'];
+
+//     $sql = "INSERT INTO item (name, type, socket, mb_size, ddr, ram_speed, nvme_slot, ram_slot, watt, sata, photo, ssd_type, ssd_size) 
+//             VALUES ('$name', '$type', '$socket', '$mb_size', '$ddr', '$ram_speed', '$nvme_slot', '$ram_slot', '$watt', '$sata', '$photo', '$ssd_type', '$ssd_size')";
+
+//     if ($conn->query($sql) === TRUE) {
+//         echo "New record created successfully!";
+//     } else {
+//         echo "Error: " . $sql . "<br>" . $conn->error;
+//     }
+// }
 if (isset($_POST['add_item'])) {
     $name = $_POST['name'];
     $type = $_POST['type'];
@@ -24,9 +48,11 @@ if (isset($_POST['add_item'])) {
     $photo = $_POST['photo'];
     $ssd_type = $_POST['ssd_type'];
     $ssd_size = $_POST['ssd_size'];
+    $pro_link_amz = $_POST['pro_link_amz'];
+    $brand = $_POST['brand'];
 
-    $sql = "INSERT INTO item (name, type, socket, mb_size, ddr, ram_speed, nvme_slot, ram_slot, watt, sata, photo, ssd_type, ssd_size) 
-            VALUES ('$name', '$type', '$socket', '$mb_size', '$ddr', '$ram_speed', '$nvme_slot', '$ram_slot', '$watt', '$sata', '$photo', '$ssd_type', '$ssd_size')";
+    $sql = "INSERT INTO item (name, type, socket, mb_size, ddr, ram_speed, nvme_slot, ram_slot, watt, sata, photo, ssd_type, ssd_size, pro_link_amz, brand) 
+            VALUES ('$name', '$type', '$socket', '$mb_size', '$ddr', '$ram_speed', '$nvme_slot', '$ram_slot', '$watt', '$sata', '$photo', '$ssd_type', '$ssd_size', '$pro_link_amz', '$brand')";
 
     if ($conn->query($sql) === TRUE) {
         echo "New record created successfully!";
@@ -34,6 +60,9 @@ if (isset($_POST['add_item'])) {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
 }
+
+
+
 
 // Delete Item
 if (isset($_GET['delete_id'])) {
@@ -47,6 +76,32 @@ if (isset($_GET['delete_id'])) {
 }
 
 // Update Item
+// if (isset($_POST['update_item'])) {
+//     $id = $_POST['id'];
+//     $name = $_POST['name'];
+//     $type = $_POST['type'];
+//     $socket = $_POST['socket'];
+//     $mb_size = $_POST['mb_size'];
+//     $ddr = $_POST['ddr'];
+//     $ram_speed = $_POST['ram_speed'];
+//     $nvme_slot = $_POST['nvme_slot'];
+//     $ram_slot = $_POST['ram_slot'];
+//     $watt = $_POST['watt'];
+//     $sata = $_POST['sata'];
+//     $photo = $_POST['photo'];
+//     $ssd_type = $_POST['ssd_type'];
+//     $ssd_size = $_POST['ssd_size'];
+
+//     $sql = "UPDATE item SET name='$name', type='$type', socket='$socket', mb_size='$mb_size', ddr='$ddr', ram_speed='$ram_speed', 
+//             nvme_slot='$nvme_slot', ram_slot='$ram_slot', watt='$watt', sata='$sata', photo='$photo', ssd_type='$ssd_type', ssd_size='$ssd_size' WHERE id=$id";
+
+//     if ($conn->query($sql) === TRUE) {
+//         echo "Record updated successfully!";
+//     } else {
+//         echo "Error updating record: " . $conn->error;
+//     }
+// }
+
 if (isset($_POST['update_item'])) {
     $id = $_POST['id'];
     $name = $_POST['name'];
@@ -62,9 +117,13 @@ if (isset($_POST['update_item'])) {
     $photo = $_POST['photo'];
     $ssd_type = $_POST['ssd_type'];
     $ssd_size = $_POST['ssd_size'];
+    $pro_link_amz = $_POST['pro_link_amz'];
+    $pro_link_flip = $_POST['pro_link_flip'];
+    $brand = $_POST['brand'];
 
     $sql = "UPDATE item SET name='$name', type='$type', socket='$socket', mb_size='$mb_size', ddr='$ddr', ram_speed='$ram_speed', 
-            nvme_slot='$nvme_slot', ram_slot='$ram_slot', watt='$watt', sata='$sata', photo='$photo', ssd_type='$ssd_type', ssd_size='$ssd_size' WHERE id=$id";
+            nvme_slot='$nvme_slot', ram_slot='$ram_slot', watt='$watt', sata='$sata', photo='$photo', ssd_type='$ssd_type', ssd_size='$ssd_size', 
+            pro_link_amz='$pro_link_amz', pro_link_flip='$pro_link_flip', brand='$brand' WHERE id=$id";
 
     if ($conn->query($sql) === TRUE) {
         echo "Record updated successfully!";
@@ -72,6 +131,9 @@ if (isset($_POST['update_item'])) {
         echo "Error updating record: " . $conn->error;
     }
 }
+
+
+
 
 // Retrieve Items
 $sql = "SELECT * FROM item";
@@ -103,12 +165,26 @@ $result = $conn->query($sql);
             <form method="POST" action="" class="grid grid-cols-1 gap-4">
                 <div>
                     <label class="block text-sm text-gray-700">Name:</label>
-                    <input type="text" name="name" class="block w-full mt-1 p-2 border border-gray-300 rounded-md">
+                    <input type="text" name="name" class="block w-full mt-1 p-2 border border-gray-300 rounded-md" require>
                 </div>
-                <div>
+                <!-- <div>
                     <label class="block text-sm text-gray-700">Type:</label>
                     <input type="text" name="type" class="block w-full mt-1 p-2 border border-gray-300 rounded-md">
-                </div>
+                </div> -->
+                <div>
+    <label class="block text-sm text-gray-700">Type:</label>
+    <select name="type" class="block w-full mt-1 p-2 border border-gray-300 rounded-md">
+        <option value="motherboard">motherboard</option>
+        <option value="cpu">cpu</option>
+        <option value="ssd">ssd</option>
+        <option value="hdd">hdd</option>
+        <option value="psu">psu</option>
+        <option value="ram">ram</option>
+        <option value="case">case</option>
+    </select>
+</div>
+
+                <!--  -->
                 <div>
                     <label class="block text-sm text-gray-700">Socket:</label>
                     <input type="text" name="socket" class="block w-full mt-1 p-2 border border-gray-300 rounded-md">
@@ -153,9 +229,25 @@ $result = $conn->query($sql);
                     <label class="block text-sm text-gray-700">SSD Size:</label>
                     <input type="text" name="ssd_size" class="block w-full mt-1 p-2 border border-gray-300 rounded-md">
                 </div>
+
+                <div>
+    <label class="block text-sm text-gray-700">Amazon Product Link:</label>
+    <input type="url" name="pro_link_amz" class="block w-full mt-1 p-2 border border-gray-300 rounded-md">
+</div>
+<!-- <div>
+    <label class="block text-sm text-gray-700">Flipkart Product Link:</label>
+    <input type="url" name="pro_link_flip" class="block w-full mt-1 p-2 border border-gray-300 rounded-md">
+</div> -->
+<div>
+    <label class="block text-sm text-gray-700">Brand:</label>
+    <input type="text" name="brand" class="block w-full mt-1 p-2 border border-gray-300 rounded-md">
+</div>
+
                 <div class="flex justify-end">
                     <button type="submit" name="add_item" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Add Item</button>
                 </div>
+                
+
             </form>
         </div>
 
@@ -178,6 +270,7 @@ $result = $conn->query($sql);
                         <th class="px-4 py-2 border">SATA</th>
                         <th class="px-4 py-2 border">Photo</th>
                         <th class="px-4 py-2 border">Actions</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -229,4 +322,29 @@ $result = $conn->query($sql);
     </div>
 
 </body>
+
+<script>
+    function validateForm() {
+        let fields = ["name", "type", "socket", "mb_size", "ddr", "ram_speed", "nvme_slot", "ram_slot", "watt", "sata", "photo", "ssd_type", "ssd_size"];
+        let isValid = true;
+
+        fields.forEach(field => {
+            let input = document.forms["addItemForm"][field];
+            if (input.value === "") {
+                isValid = false;
+                input.style.border = "2px solid red";
+                alert(field.charAt(0).toUpperCase() + field.slice(1) + " is required.");
+            } else if (["ram_speed", "nvme_slot", "ram_slot", "watt", "sata"].includes(field) && isNaN(input.value)) {
+                isValid = false;
+                input.style.border = "2px solid red";
+                alert(field.charAt(0).toUpperCase() + field.slice(1) + " should be a number.");
+            } else {
+                input.style.border = "1px solid #ccc";
+            }
+        });
+
+        return isValid;
+    }
+</script>
+
 </html>

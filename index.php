@@ -58,7 +58,7 @@
                     <img class="shirt" src="img/products/f1.jpg" alt="">
                     <div class="des">
                         <span>ROG</span>
-                        <h5>Product name</h5>
+                        <h5>Motherboard</h5>
                         <div class="star">
                             <i class='bx bxs-star' ></i>
                             <i class='bx bxs-star' ></i>
@@ -66,15 +66,15 @@
                             <i class='bx bxs-star' ></i>
                             <i class='bx bxs-star' ></i>
                         </div>
-                        <h4>₹2499</h4>
+                        
                     </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
+                    <a href="shop.php"><i class='bx bx-cart cart' ></i></a>
                 </div>
                 <div class="pro">
                     <img class="shirt" src="img/products/f2.jpg" alt="">
                     <div class="des">
                         <span>ROG</span>
-                        <h5>Product name</h5>
+                        <h5>Motherboard</h5>
                         <div class="star">
                             <i class='bx bxs-star' ></i>
                             <i class='bx bxs-star' ></i>
@@ -82,15 +82,15 @@
                             <i class='bx bxs-star' ></i>
                             <i class='bx bxs-star' ></i>
                         </div>
-                        <h4>₹2499</h4>
+                        
                     </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
+                    <a href="shop.php"><i class='bx bx-cart cart' ></i></a>
                 </div>
                 <div class="pro">
                     <img class="shirt" src="img/products/f3.jpg" alt="">
                     <div class="des">
-                        <span>ROG</span>
-                        <h5>Product name</h5>
+                        <span>MSI</span>
+                        <h5>Motherboard</h5>
                         <div class="star">
                             <i class='bx bxs-star' ></i>
                             <i class='bx bxs-star' ></i>
@@ -98,31 +98,31 @@
                             <i class='bx bxs-star' ></i>
                             <i class='bx bxs-star' ></i>
                         </div>
-                        <h4>₹2499</h4>
+                        
                     </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
+                    <a href="shop.php"><i class='bx bx-cart cart' ></i></a>
                 </div>
                 <div class="pro">
                     <img class="shirt" src="img/products/f4.jpg" alt="">
                     <div class="des">
-                        <span>ROG</span>
-                        <h5>Product name</h5>
+                        <span>XPG</span>
+                        <h5>RAM</h5>
                         <div class="star">
                             <i class='bx bxs-star' ></i>
                             <i class='bx bxs-star' ></i>
                             <i class='bx bxs-star' ></i>
                             <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
+                            
                         </div>
-                        <h4>₹2499</h4>
+                        
                     </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
+                    <a href="shop.php"><i class='bx bx-cart cart' ></i></a>
                 </div>
                 <div class="pro">
                     <img class="shirt" src="img/products/f5.jpg" alt="">
                     <div class="des">
-                        <span>ROG</span>
-                        <h5>Product name</h5>
+                        <span>ASUS</span>
+                        <h5>Graphics card</h5>
                         <div class="star">
                             <i class='bx bxs-star' ></i>
                             <i class='bx bxs-star' ></i>
@@ -130,15 +130,15 @@
                             <i class='bx bxs-star' ></i>
                             <i class='bx bxs-star' ></i>
                         </div>
-                        <h4>₹2499</h4>
+                        
                     </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
+                    <a href="shop.php"><i class='bx bx-cart cart' ></i></a>
                 </div>
                 <div class="pro">
                     <img class="shirt" src="img/products/f6.jpg" alt="">
                     <div class="des">
-                        <span>ROG</span>
-                        <h5>Product name</h5>
+                        <span>ANT</span>
+                        <h5>Case</h5>
                         <div class="star">
                             <i class='bx bxs-star' ></i>
                             <i class='bx bxs-star' ></i>
@@ -146,15 +146,15 @@
                             <i class='bx bxs-star' ></i>
                             <i class='bx bxs-star' ></i>
                         </div>
-                        <h4>₹2499</h4>
+                        
                     </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
+                    <a href="shop.php"><i class='bx bx-cart cart' ></i></a>
                 </div>
                 <div class="pro">
                     <img class="shirt" src="img/products/f7.jpg" alt="">
                     <div class="des">
                         <span>ROG</span>
-                        <h5>Product name</h5>
+                        <h5>Cooler</h5>
                         <div class="star">
                             <i class='bx bxs-star' ></i>
                             <i class='bx bxs-star' ></i>
@@ -162,15 +162,15 @@
                             <i class='bx bxs-star' ></i>
                             <i class='bx bxs-star' ></i>
                         </div>
-                        <h4>₹2499</h4>
+                        
                     </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
+                    <a href="shop.php"><i class='bx bx-cart cart' ></i></a>
                 </div>
                 <div class="pro">
                     <img class="shirt" src="img/products/f8.jpg" alt="">
                     <div class="des">
-                        <span>ROG</span>
-                        <h5>Product name</h5>
+                        <span>Intel</span>
+                        <h5>Processor</h5>
                         <div class="star">
                             <i class='bx bxs-star' ></i>
                             <i class='bx bxs-star' ></i>
@@ -178,9 +178,9 @@
                             <i class='bx bxs-star' ></i>
                             <i class='bx bxs-star' ></i>
                         </div>
-                        <h4>₹2499</h4>
+                        
                     </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
+                    <a href="shop.php"><i class='bx bx-cart cart' ></i></a>
                 </div>
             </div>
         </section>

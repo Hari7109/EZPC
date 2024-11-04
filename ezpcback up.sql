@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2024 at 05:27 PM
+-- Generation Time: Sep 26, 2024 at 06:20 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -106,29 +106,28 @@ CREATE TABLE `item` (
   `ssd_type` varchar(100) DEFAULT NULL,
   `ssd_size` int(11) DEFAULT NULL,
   `pro_link_amz` varchar(256) DEFAULT NULL,
-  `pro_link_flip` varchar(256) DEFAULT NULL,
-  `brand` varchar(100) DEFAULT NULL
+  `pro_link_flip` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `item`
 --
 
-INSERT INTO `item` (`item_id`, `name`, `type`, `socket`, `mb_size`, `ddr`, `ram_speed`, `nvme_slot`, `ram_slot`, `watt`, `sata`, `photo`, `ssd_type`, `ssd_size`, `pro_link_amz`, `pro_link_flip`, `brand`) VALUES
-(1, 'rog mother board', 'motherboard', 'lga100', 'mini', 5, 5600, 2, 8, 80, 4, 'f1.jpg', NULL, NULL, 'https://amzn.in/d/8wRFtJt', NULL, 'ASUS'),
-(3, 'MSI mother board', 'motherboard', 'am5', 'atx', 6, 7200, 2, 4, 60, 4, 'f3.jpg', NULL, NULL, 'https://amzn.in/d/5Sx6YHE', NULL, 'MSI'),
-(4, 'i9 10th', 'cpu', 'lga100', '', 0, 0, 0, 0, 75, 0, 'f8.jpg', NULL, NULL, NULL, NULL, 'Intel'),
-(5, 'Ryzen 9', 'cpu', 'am5', '', 0, 0, 0, 0, 80, 0, 'n4.jpg', NULL, NULL, NULL, NULL, 'Ryzen'),
-(8, 'crucial', 'ssd', '', '', 0, 0, 0, 0, 0, 0, 'f10.jpg', 'sata', 1000, NULL, NULL, 'Crucial'),
-(9, 'crucial', 'ssd', '', '', 0, 0, 0, 0, 0, 0, 'f11.jpg', 'nvme', 1000, NULL, NULL, 'Curcial'),
-(10, 'rog psu', 'psu', '', '', 0, 0, 0, 0, 550, 0, 'f12.jpg', '', 0, NULL, NULL, 'ROG'),
-(11, 'msi psu', 'psu', '', '', 0, 0, 0, 0, 450, 0, 'f13.jpg', '', 0, NULL, NULL, 'MSI'),
-(12, 'rog ex', 'psu', '', '', 0, 0, 0, 0, 1200, 0, 'f14.jpg', '', 0, NULL, NULL, 'ASUS'),
-(13, 'rog mini case', 'case', '', 'mini', 0, 0, 0, 0, 0, 0, 'n7.jpg', '', 0, NULL, NULL, 'ASUS'),
-(14, 'rog atx case', 'case', '', 'atx', 0, 0, 0, 0, 0, 0, 'n5.jpg', '', 0, NULL, NULL, 'ASUS'),
-(18, 'ram', 'ram', '', '', 5, 5600, 0, 0, 0, 0, 'f4.jpg', '', 0, NULL, NULL, 'XPG'),
-(19, 'ram speed', 'ram', '', '', 6, 7200, 0, 0, 0, 0, 'n3.jpg', '', 0, NULL, NULL, 'Trident'),
-(20, 'ant case', 'case', '', 'atx', 0, 0, 0, 0, 0, 0, 'n6.jpg', '', 0, NULL, NULL, 'ANT');
+INSERT INTO `item` (`item_id`, `name`, `type`, `socket`, `mb_size`, `ddr`, `ram_speed`, `nvme_slot`, `ram_slot`, `watt`, `sata`, `photo`, `ssd_type`, `ssd_size`, `pro_link_amz`, `pro_link_flip`) VALUES
+(1, 'rog mother board', 'motherboard', 'lga100', 'mini', 5, 5600, 2, 8, 80, 4, 'f1.jpg', NULL, NULL, 'https://amzn.in/d/8wRFtJt', NULL),
+(3, 'MSI mother board', 'motherboard', 'am5', 'atx', 6, 7200, 2, 4, 60, 4, '', NULL, NULL, NULL, NULL),
+(4, 'i5 10th', 'cpu', 'lga100', '', 0, 0, 0, 0, 75, 0, '', NULL, NULL, NULL, NULL),
+(5, 'Ryzen 5', 'cpu', 'am5', '', 0, 0, 0, 0, 80, 0, '', NULL, NULL, NULL, NULL),
+(8, 'crucial', 'ssd', '', '', 0, 0, 0, 0, 0, 0, '', 'sata', 1000, NULL, NULL),
+(9, 'crucial', 'ssd', '', '', 0, 0, 0, 0, 0, 0, '', 'nvme', 1000, NULL, NULL),
+(10, 'rog psu', 'psu', '', '', 0, 0, 0, 0, 550, 0, '', '', 0, NULL, NULL),
+(11, 'msi psu', 'psu', '', '', 0, 0, 0, 0, 450, 0, '', '', 0, NULL, NULL),
+(12, 'rog ex', 'psu', '', '', 0, 0, 0, 0, 1200, 0, '', '', 0, NULL, NULL),
+(13, 'rog mini case', 'case', '', 'mini', 0, 0, 0, 0, 0, 0, '', '', 0, NULL, NULL),
+(14, 'rog atx case', 'case', '', 'atx', 0, 0, 0, 0, 0, 0, '', '', 0, NULL, NULL),
+(18, 'ram', 'ram', '', '', 5, 5600, 0, 0, 0, 0, '', '', 0, NULL, NULL),
+(19, 'ram speed', 'ram', '', '', 6, 7200, 0, 0, 0, 0, '', '', 0, NULL, NULL),
+(20, 'ant case', 'case', '', 'atx', 0, 0, 0, 0, 0, 0, '', '', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -161,9 +160,7 @@ INSERT INTO `messages` (`id`, `username`, `message`, `created_at`) VALUES
 (15, 'Hari7109', 'sdf', '2024-09-26 04:17:40'),
 (16, 'itsbaizil', 'sa', '2024-09-26 04:18:46'),
 (17, 'Hari7109', 'ss', '2024-09-26 04:18:52'),
-(18, 'itsbaizil', 'sss', '2024-09-26 04:19:02'),
-(19, 'Hari7109', 'hello\n', '2024-11-04 15:40:19'),
-(20, 'Hari7109', 'hello \n\nhi', '2024-11-04 15:40:29');
+(18, 'itsbaizil', 'sss', '2024-09-26 04:19:02');
 
 -- --------------------------------------------------------
 
@@ -210,7 +207,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `user_name`, `email`, `password`, `created_at`) VALUES
 (2, 'Hari krishnan', 'Hari7109', 'harikrishnan7109@gmail.com', 'ass', '2024-09-21 11:32:11'),
-(3, 'baizil', 'itsbaizil', 'baizildas@gmail.com', 'baa', '2024-09-26 04:16:49');
+(3, 'baizil', 'itsbaizil', 'baizildas@gmail.com', 'niggaballs', '2024-09-26 04:16:49');
 
 --
 -- Indexes for dumped tables
@@ -287,13 +284,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `products`
